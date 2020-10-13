@@ -1,0 +1,17 @@
+@layout('layouts.default')
+
+@section('contents')
+    <h1>Books Index</h1>
+    
+    @if(old('notification'))
+        <div class="alert alert-success">
+        {{ old('notification') }}
+        </div>
+    @endif
+
+    <ul>
+        @each(book in books)
+    <li>{{ book.title }} - {{ book.author }}</li>
+        @endeach
+    </ul>
+@endsection
