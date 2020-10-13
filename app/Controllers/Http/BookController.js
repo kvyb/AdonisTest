@@ -4,15 +4,11 @@ const Book = use('App/Models/Book')
 const { validate } = use("Validator")
 
 class BookController {
-    async index({ view }) {
-      const books = [
-        { title: "Book 1", author: "John Doe" },
-        { title: "Book 2", author: "Jane Doe" },
-        { title: "Book 3", author: "Adam Smith" },
-      ];
-  
+    async index({ view }) {  
+      const books = await Book.all();
+
       return view.render("book.index", {
-        books: books,
+        books: books.toJSON(),
       });
     }
     //creates form referred from router and renders /book/create view

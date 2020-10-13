@@ -12,10 +12,13 @@
 */
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
-// const Factory = use('Factory')
+const Factory = use('Factory')
 
-// Factory.blueprint('App/Models/User', (faker) => {
-//   return {
-//     username: faker.username()
-//   }
-// })
+Factory.blueprint('App/Models/Book', (faker) => {
+   return {
+     title: faker.sentence({ words:5 }),
+     author: faker.name(),
+     cover_image: "https://via.placeholder.com/300",
+     isbn: faker.string({ length: 10, numeric: true })
+   }
+})
