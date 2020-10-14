@@ -1,6 +1,6 @@
 @layout('layouts.default')
 
-@section('contents')
+@section('content')
     <h1>Books Index</h1>
     
     @if(flashMessage('notification'))
@@ -21,8 +21,8 @@
         <tbody>
           @each(book in books)
             <tr>
-              <td><img src="{{ book.cover_image }}" alt="{{ book.title }}" style="width: 100px;"></td>
-              <td scope="row">{{ book.title }}</td>
+              <td><a href="/books/{{ book.id }}"><img src="{{ book.cover_image }}" alt="{{ book.title }}" style="width: 100px;"></td>
+              <td scope="row"><a href="/books/{{ book.id }}">{{ book.title }}</td>
               <td>{{ book.author }}</td>
               <td>{{ book.isbn }}</td>
             </tr>

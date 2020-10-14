@@ -40,8 +40,48 @@ class BookController {
 
         session.flash({ notification: "Book has been Created" });
         return response.redirect("/");
-      }
+    }
+    //Show page for each book based on its ID
+    async show({ params, view }) {
+        const book = await Book.find(params.id);
+    
+        return view.render("book.show", {
+          book,
+        });
+    }
+    
+    async edit({ params, view }) {
+        const book = await Book.find(params.id);
 
-  }
+        return view.render("book.edit", {
+            book,
+        });
+    }
+
+    async update({ params, request, response, session }) {
+        const book = await Book.find(params.id);
+    
+        book.title = request.input("title");
+        book.author = request.input("author");
+        book.cover_image = request.input("cover_image");
+        book.isbn = request.input("isbn");
+    
+        await book.save();
+    
+        session.flash({ notification: "Book Updated" });
+    
+        return response.redirect("/");
+    }
+    
+    async destroy({ params, session, response }) {
+        const book = await Book.find(params.id);
+    
+        await book.delete();
+    
+        session.flash({ notification: "Book Deleted" });
+    
+        return response.redirect("/");
+    }
+}
 
 module.exports = BookController
